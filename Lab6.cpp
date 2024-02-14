@@ -20,21 +20,29 @@ int main() {
 	Image foregroundImage;
 	foregroundImage = foregroundTex.copyToImage();
 	Vector2u sz = backgroundImage.getSize();
+
+	//Gets the corner pixel and sets that as the green color to be removed
 	Color green = foregroundImage.getPixel(0, 0);
+
+	//Sets the tolorance for the green pixel removal
 	int colorDiff = 65;
+
 	for (int y = 0; y < sz.y; y++) {
 		for (int x = 0; x < sz.x; x++) {
-			// These two loops will run the code inside for each pixel in the background image
-			// You can access the current pixel at x,y like so: Color example = foregroundImage.getPixel(x, y);
-			// Color objects store the individual channel values like example.r example.g and example.b
+
+			//Gets the current and foreground and background pixel and sets that to a variable
 			Color curFore = foregroundImage.getPixel(x, y);
 			Color curBack = backgroundImage.getPixel(x, y);
 
 			if (
+				//checks the diffrence in color for each rbg value between the forground and green pixel 
+				//and checks if they are within the colorDiff tolorance
 				abs((curFore.r - green.r)) < colorDiff &&
 				abs((curFore.g - green.g)) < colorDiff &&
 				abs((curFore.b - green.b)) < colorDiff
 				) {
+
+				//sets the forground pixel to the background image 
 				foregroundImage.setPixel(x, y, curBack);
 			}
 		}
