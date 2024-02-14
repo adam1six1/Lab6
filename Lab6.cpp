@@ -21,7 +21,7 @@ int main() {
 	foregroundImage = foregroundTex.copyToImage();
 	Vector2u sz = backgroundImage.getSize();
 	Color green = foregroundImage.getPixel(0, 0);
-	int colorDiff = 50;
+	int colorDiff = 65;
 	for (int y = 0; y < sz.y; y++) {
 		for (int x = 0; x < sz.x; x++) {
 			// These two loops will run the code inside for each pixel in the background image
