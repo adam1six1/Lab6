@@ -21,14 +21,21 @@ int main() {
 	foregroundImage = foregroundTex.copyToImage();
 	Vector2u sz = backgroundImage.getSize();
 	Color green = foregroundImage.getPixel(0, 0);
+	int colorDiff = 50;
 	for (int y = 0; y < sz.y; y++) {
 		for (int x = 0; x < sz.x; x++) {
 			// These two loops will run the code inside for each pixel in the background image
 			// You can access the current pixel at x,y like so: Color example = foregroundImage.getPixel(x, y);
 			// Color objects store the individual channel values like example.r example.g and example.b
+			Color curFore = foregroundImage.getPixel(x, y);
+			Color curBack = backgroundImage.getPixel(x, y);
 
-			if (foregroundImage.getPixel(x, y) == green) {
-				foregroundImage.setPixel(x, y, backgroundImage.getPixel(x, y));
+			if (
+				abs((curFore.r - green.r)) < colorDiff &&
+				abs((curFore.g - green.g)) < colorDiff &&
+				abs((curFore.b - green.b)) < colorDiff
+				) {
+				foregroundImage.setPixel(x, y, curBack);
 			}
 		}
 	}
